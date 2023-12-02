@@ -18,16 +18,15 @@ def solution(input):
             draws = s.split(',')
            
             for d in draws:
-                x = d.strip().split(' ')
+                x = d.strip().split()
                 count = int(x[0])
                 color = x[1]
+                games_dict["sets"].append({"color":color, "count":count})
+                # Required for part 1 and not for part 2
                 if(count > colors_limit[color]):
                     allGood=False
                     break
-                    
-                #     break
-                # else:
-                #    games_dict["gameId"]["sets"].append({color:count})
+                   
     
         if(allGood):
             sum+=int(gameId)
@@ -36,6 +35,26 @@ def solution(input):
        
     print(sum)
     
+    return arr
+    
 
 def part2(input):
-    x=10
+    gameAndSets = solution(input)
+    
+    sum = 0
+    for g in gameAndSets:
+        obj={}
+        
+        for s in g["sets"]:
+            if(obj.get(s["color"])==None):
+                obj[s["color"]]=s['count']
+            elif(obj.get(s["color"])<s['count']):
+                 obj[s["color"]]=s['count']
+        x=1 
+                
+        for k in obj:
+                x*=int(obj[k])
+                
+        sum+=x
+    
+    print(sum)
