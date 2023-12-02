@@ -3,4 +3,4 @@ import importlib
 day= "day1"
 dayModule = importlib.import_module(f"{day}.solution")
 input = openFile(f"{day}/input.txt")
-dayModule.solution(input)
+dayModule.part2(input)
