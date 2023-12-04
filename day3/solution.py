@@ -71,22 +71,16 @@ def solution(input):
             for c in f["coordinates"]:
                 if(sc["neighbours"].get(c)!=None):
                     if(sc["own"]=='*'):
-                        # print(astericks)  
                         if(astericks.get(sc["rowId"]) != None and astericks[sc["rowId"]]["neighbours"] == sc["neighbours"]):
                             part2Numbers.append(f["value"])
-                            # print(astericks[sc["rowId"]]["value"],f["value"])
                             part2Total+=astericks[sc["rowId"]]["value"]*f["value"]
-                            # print(f["value"], sc["neighbours"], astericks[sc["rowId"]]["neighbours"] )
                             astericks[sc["rowId"]] = None
                         else:
-                            # print(f["value"], sc)
-                            # print(f["value"], sc["neighbours"] )
-                            # part2Numbers.append(f["value"])
                             astericks[sc["rowId"]] = {"value":f["value"], "neighbours": sc["neighbours"]}
                     total+=f["value"]
                     break
 
 
-    # print(total)
+    print(total)
     print(part2Total)                        
                           
