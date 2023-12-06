@@ -50,12 +50,8 @@ def solution(input:[str]):
         soil_location=num
         for i,first_tup in enumerate(dct[key1]):
             second_tup = dct[key2][i]
-            # if(num==52):
-            #     print(num, first_tup,second_tup)
             if(num>=first_tup[0] and num<=first_tup[1]):
                 soil_location= second_tup[0]+ num- first_tup[0]
-                # print(f"==>> key1: {key1}{key2}{soil_location}")
-        # print(f"==>> soil_location: {key1}{key2}{soil_location}")
         return soil_location
         
     for seed in seeds:
