@@ -14,16 +14,49 @@ def group_list(lst):
     return x
  
 
-def part1(list1: list[str],list2: list[str]):
-    total = 0
-    sort(list1, False)
-    sort(list2, False)
-        
-    for i, item in enumerate(list1):
-        diff = abs(item - list2[i])
-        total+=diff
+def check_safe_unsafe(nums):
+    diff:int = None
+    prevNum:int = None
+    arr=[]
     
-    return total
+    for i, num in enumerate(nums):
+        # print(prevNum)
+        if(diff == None):
+            diff = 0
+            prevNum = num
+            continue
+        if(prevNum-num>0):
+            arr.append('I')
+        else:
+            arr.append('D')
+            
+        diff = abs(prevNum - num)
+        
+        prevNum = num
+        if(diff<1 or diff>3 or len(set(arr))>1):
+            # print('UNSAFE', nums)
+            # return nums
+            return 0
+
+        if(i == len(nums)-1):
+            return 1
+
+ 
+
+def part1(input: list[str]):
+    safe_total=0
+    unsafes=[]
+    for item in input:
+        nums= [ int(x) for x in item.split(' ')]
+        x=check_safe_unsafe(nums)
+        if(x==0):
+          unsafes.append(nums)
+        else:
+            safe_total+=1
+        
+    print('SAFE',safe_total)
+    return unsafes
+
 
 
 def part2(list1: list[str],list2: list[str]):
@@ -37,40 +70,30 @@ def part2(list1: list[str],list2: list[str]):
     
    print(total)
 
-        
+def check_all(lst,index):
+  newList = list(lst)
+  newList.pop(index)
+  
+  x=check_safe_unsafe(newList)
+  if(x==1):
+    return 1
+  else:
+    if(index!=len(lst)-1):
+      return check_all(lst, index+1)    
+    
+    
+            
 def solution(input: list[str]):
-    safes=0
-    for item in input:
-        nums= [ int(x) for x in item.split(' ')]
-        diff:int = None
-        prevNum:int = None
-        arr=[]
-        
-        for i, num in enumerate(nums):
-            # print(prevNum)
-            if(diff == None):
-              diff = 0
-              prevNum = num
-              continue
-            if(prevNum-num>0):
-                arr.append('I')
-            else:
-                arr.append('D')
-                
-            diff = abs(prevNum - num)
-           
-            prevNum = num
-            if(diff<1 or diff>3 or len(set(arr))>1):
-                # print('UNSAFE', nums)
-                diff = None
-                prevNum = None
-                break
-
-            if(i== len(nums)-1):
-                safes+=1
-        
-    print(safes)
-
+    unsafe_total=0
+    unsafes = part1(input)
+    for unsafe in unsafes:
+        res=check_all(unsafe,0)
+       
+        if(res==1):
+            unsafe_total+=1
+    
+    
+    print('UNSAFE',unsafe_total)
         
     # part2(list1, list2)
     # print(part1(list1, list2))
