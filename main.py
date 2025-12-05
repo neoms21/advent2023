@@ -1,9 +1,9 @@
-from input import openFile
 import importlib
+from input import openFile
 
-day = "day2"
+day = "day3"
 path = f"{day}"
 dayModule = importlib.import_module(f"{path}.solution")
-input = openFile(f"{path}/input.txt")
+contents = openFile(f"{path}/input.txt")
 
-dayModule.solution(input)
+dayModule.solution(contents)
